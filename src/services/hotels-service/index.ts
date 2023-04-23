@@ -32,8 +32,8 @@ async function getHotels(): Promise<Hotel[]> {
   return hotels;
 }
 
-async function getHotelById(id: number): Promise<Hotel> {
-  const hotel = await hotelRepository.findHotelsById(id);
+async function getHotelById(hotelId: number): Promise<Hotel> {
+  const hotel = await hotelRepository.findHotelsById(hotelId);
 
   if (!hotel) throw notFoundError();
 
