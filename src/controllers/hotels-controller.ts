@@ -1,3 +1,4 @@
+import { Response } from 'express';
 import httpStatus from 'http-status';
 import { AuthenticatedRequest } from '@/middlewares';
 import hotelsService from '@/services/hotels-service';
@@ -7,7 +8,10 @@ export async function getHotels(req: AuthenticatedRequest, res: Response) {
   try {
     await hotelsService.confirmed(userId);
   } catch (error) {
-    console.log(error);
+    if (error.name === 'NotFoundError') {
+      res.status(httpStatus.NOT_FOUND).send({});
+    }
+    res.status(httpStatus.PAYMENT_REQUIRED).send({});
   }
 
   try {
@@ -15,7 +19,7 @@ export async function getHotels(req: AuthenticatedRequest, res: Response) {
 
     return res.status(httpStatus.OK).send(hotels);
   } catch (error) {
-    console.log(error);
+    res.status(httpStatus.NOT_FOUND).send({});
   }
 }
 
@@ -25,7 +29,10 @@ export async function getHotelById(req: AuthenticatedRequest, res: Response) {
   try {
     await hotelsService.confirmed(userId);
   } catch (error) {
-    console.log(error);
+    if (error.name === 'NotFoundError') {
+      res.status(httpStatus.NOT_FOUND).send({});
+    }
+    res.status(httpStatus.PAYMENT_REQUIRED).send({});
   }
 
   try {
@@ -33,6 +40,6 @@ export async function getHotelById(req: AuthenticatedRequest, res: Response) {
 
     return res.status(httpStatus.OK).send(hotel);
   } catch (error) {
-    console.log(error);
+    return res.status(httpStatus.BAD_REQUEST).send({});
   }
 }

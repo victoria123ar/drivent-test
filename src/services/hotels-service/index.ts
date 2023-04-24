@@ -19,7 +19,6 @@ async function confirmed(userId: number): Promise<ApplicationError | boolean> {
   if (ticket.TicketType.isRemote === true) throw { name: 'ticket type is remote' };
 
   if (ticket.TicketType.includesHotel === false) throw { name: 'not includes hotel' };
-  ç;
 
   return null;
 }
