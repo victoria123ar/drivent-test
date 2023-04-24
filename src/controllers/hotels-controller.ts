@@ -24,8 +24,9 @@ export async function getHotels(req: AuthenticatedRequest, res: Response) {
 }
 
 export async function getHotelById(req: AuthenticatedRequest, res: Response) {
-  const hotelId = Number(req.params.id);
+  const hotelId = Number(req.params.hotelId);
   const { userId } = req;
+
   try {
     await hotelsService.confirmed(userId);
   } catch (error) {

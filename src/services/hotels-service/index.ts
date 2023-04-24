@@ -27,7 +27,6 @@ async function getHotels(): Promise<Hotel[]> {
   const hotels = await hotelRepository.findHotels();
 
   if (!hotels) throw notFoundError();
-
   return hotels;
 }
 
@@ -35,6 +34,7 @@ async function getHotelById(hotelId: number): Promise<Hotel> {
   const hotel = await hotelRepository.findHotelsById(hotelId);
 
   if (!hotel) throw notFoundError();
+
   return hotel;
 }
 
